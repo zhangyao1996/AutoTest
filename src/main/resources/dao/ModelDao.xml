@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaxin.dao.ModelDao">
+
+	 <resultMap id="BaseResultMap" type="com.huaxin.entity.Model">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="project_id" jdbcType="BIGINT" property="projectId"/>
+        <result column="model_desc" jdbcType="VARCHAR" property="modelDesc"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="test_id" jdbcType="BIGINT" property="testId"/>
+        <result column="dev_id" jdbcType="BIGINT" property="devId"/>
+        <association property="project" javaType="com.huaxin.entity.Project">
+			<id column="project_id"  property="id"/>
+			<result property="projectName" column="project_name"></result>
+		</association>
+		<association property="user" javaType="com.huaxin.entity.User">
+			<id column="test_id"  property="id"/>
+			<result property="userName" column="user_name"></result>
+		</association>
+		<association property="user1" javaType="com.huaxin.entity.User">
+			<id column="dev_id"  property="id"/>
+			<result property="userName" column="user_name"></result>
+		</association>
+    </resultMap>
+    
+     <sql id="modelColumns">
+    	sm.id,
+    	sm.model_name,
+    	sm.project_id,
+    	sm.model_desc,
+    	sm.status,
+    	sm.test_id,
+    	sm.dev_id,
+    	sp.project_name,
+    	su.user_name,
+    	su.user_name
+    </sql>
+<!--     
+   <select id="getModelList" resultMap="BaseResultMap">
+		SELECT sm.id,
+    	sm.model_name,
+    	sm.project_id,
+    	sm.model_desc,
+    	sm.status,
+    	sm.test_id,
+    	sm.dev_id,
+    	sp.project_name,
+    	su.user_name  ,su2.user_name FROM sys_user su ,sys_model sm ,sys_project sp,sys_user su2 
+    	WHERE  sm.project_id=sp.id AND sm.test_id=su.id 
+	</select> -->
+	    
+   <select id="getModelList" resultType="HashMap">
+	 SELECT sm.id ,sm.model_name AS modelName FROM sys_model sm    
+   </select>
+	
+
+</mapper> 

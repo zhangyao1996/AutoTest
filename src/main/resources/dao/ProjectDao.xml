@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaxin.dao.ProjectDao">
+
+	 <resultMap id="BaseResultMap" type="com.huaxin.entity.Project">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+    </resultMap>
+    
+    
+    <select id="getProjectList" resultMap="BaseResultMap">
+		SELECT * FROM sys_project
+	</select>
+	
+	<!-- <select id="getCaseList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="caseColumns"/>
+		FROM sys_case sc,
+		sys_project sp,
+		sys_model sm
+	    WHERE sp.id=sc.project_id
+		AND	sm.id=sc.model_id
+	</select> -->
+</mapper> 
