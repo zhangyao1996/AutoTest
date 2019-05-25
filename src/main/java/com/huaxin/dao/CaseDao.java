@@ -28,5 +28,13 @@ public interface CaseDao {
 	
 	//编辑
 	public int updateCase(Case case1);
+
+	public int deleteCaseByModelId(Long id);
+
+	public List<Case> searchCaseList(Case case1);
+
+	public void deleteCaseByProId(Long id);
+
+	public Case getCaseByCaseName(String caseName);
 	
 }

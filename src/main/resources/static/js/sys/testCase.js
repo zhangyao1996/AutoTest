@@ -8,6 +8,7 @@ layui.use('table', function(){
     ,url: '../../interface/testCaseList' //数据接口
     ,page: true //开启分页
     ,limit:9 //每页显示数据数目
+    ,id:'tableDate'
     ,cols: [[ //表头
     	 {type:'checkbox'}
       ,{field: 'id', title: 'ID', width:'5%'}
@@ -20,6 +21,46 @@ layui.use('table', function(){
       ,{field: 'status', title: '状态', width: '11%'}
     ]]
   });
+  
+  
+  //搜索功能
+  var $ = layui.$, active = {
+			reload : function() {
+				var caseName=$("#casename").val();
+				var projectId=$("#projectId").val();
+				var modelId=$("#modelId").val();
+				var api=$("#api").val();
+				var version=$("#version").val();
+				var status=$("#status").val();
+				var index=layer.msg('查询中，请稍后。。。',{icon:16,time:false,shade:0});
+				setTimeout(function() {
+				 table.reload('tableDate', {//执行table重载
+					// 从第 1 页开始
+					page : {
+						curr : 1
+					}
+					// 设定异步数据接口的额外参数
+					,
+					where : {
+						caseName:caseName,
+						projectId:projectId,
+						modelId:modelId,
+						api:api,
+						version:version,
+						status:status,
+					}
+				});
+				 layer.close(index);
+				},800);
+			}
+  };
+  
+  
+//点击搜索
+  $('#search').on('click', function() {
+		var type = $(this).data('type');
+		active[type] ? active[type].call(this) : '';
+	});
   
   //头工具栏事件
   table.on('toolbar(test)', function(obj){
@@ -35,7 +76,7 @@ layui.use('table', function(){
 			for(var i=0;i<data.length;i++){
 				ids+=data[i].id+",";
 			}
-			layer.confirm('是否删除这'+data.length+'条用例',{icon: 3,title:'提示'},function(index){
+			layer.confirm('是否删除这'+data.length+'条用例？这可能导致与之相关的步骤被删除',{icon: 3,title:'提示'},function(index){
 				//window.location.href="../../user/deleteUserIds?ids="+ids+"";
 				deleteCaseIds(ids);
 			});

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaxin.dao.StepDao">
+
+	<resultMap id="BaseResultMap" type="com.huaxin.entity.Step">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="step_name" jdbcType="VARCHAR"
+			property="stepName" />
+		<result column="case_id" jdbcType="BIGINT" property="caseId" />
+		<result column="req_mode" jdbcType="VARCHAR" property="reqMode" />
+		<result column="header" jdbcType="VARCHAR" property="header" />
+		<result column="param" jdbcType="VARCHAR" property="param" />
+		<result column="assert" jdbcType="VARCHAR" property="ast" />
+		<result column="step_desc" jdbcType="VARCHAR"
+			property="stepDesc" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+	</resultMap>
+
+	<sql id="stepColumns">
+		ss.id,
+		ss.step_name AS stepName,
+		ss.req_mode AS reqMode,
+		ss.header,
+		ss.param,
+		ss.assert AS assert,
+		ss.step_desc AS stepDesc,
+		ss.status,
+		sc.case_name AS caseName
+	</sql>
+	
+	
+	<select id="searchStepList" parameterType="Step" resultType="HashMap">
+		SELECT
+		<include refid="stepColumns" />
+		FROM sys_step ss LEFT JOIN sys_case sc ON sc.id=ss.case_id
+		WHERE 1=1
+		<if test="stepName!=null and stepName!=''">AND ss.step_name like '%${stepName}%' </if>
+		<if test="reqMode!=null and reqMode!='' ">AND ss.req_mode=#{reqMode} </if>
+        order by ss.id ASC
+	</select>
+
+	<delete id="deleteStepByCaseId" parameterType="java.lang.Long">
+	DELETE FROM sys_step WHERE case_id=#{id}
+	</delete>
+	
+	<delete id="deleteStepById" parameterType="java.lang.Long">
+	DELETE FROM sys_step WHERE id=#{id}
+	</delete>
+
+</mapper> 

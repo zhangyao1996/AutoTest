@@ -19,7 +19,7 @@
 				placeholder="用例名">
 		</div>
 		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="projectId" id="projectId" lay-verify="required" lay-filter="projectId">
+			<select class="layui-input" name="projectId" id="projectId" lay-filter="projectId">
 					<option value="">项目名</option>
 					<option th:selected="${projectId  eq project.id}"
 						th:each="project : ${projectList}" th:value="${project.id}"
@@ -27,7 +27,7 @@
 			</select>
 		</div>
 		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="modelId" id="modelId" lay-verify="required" lay-filter="modelId">
+			<select class="layui-input" name="modelId" id="modelId" lay-filter="modelId">
 					<option value="">模块名</option>
 					<option th:selected="${modelId  eq model.id}"
 						th:each="model : ${modelList}" th:value="${model.id}"
@@ -43,13 +43,13 @@
 				placeholder="版本">
 		</div>
 		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="status" lay-verify="">
+			<select class="layui-input" name="status" id="status">
 				<option value="">状态</option>
-				<option value="0">False</option>
-				<option value="1">True</option>
+				<option value="False">False</option>
+				<option value="True">True</option>
 			</select>
 		</div>
-		<button class="layui-btn" data-type="reload">搜索</button>
+		<button class="layui-btn" data-type="reload" id="search">搜索</button>
 	</div>
 	<!-- 动态表格 -->
 	<table id="testCase" lay-filter="test"></table>

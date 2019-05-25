@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>模块信息</title>
+<title>步骤信息</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta
@@ -14,7 +14,11 @@
 </head>
 <body>
 	<div class="layui-form-item">
-		<div class="layui-input-inline" style="width: 100px;">
+		<div class="layui-input-inline">
+			<input class="layui-input" id="stepname" autocomplete="off"
+				placeholder="步骤名">
+		</div>
+	<!-- 	<div class="layui-input-inline" style="width: 100px;">
 			<select class="layui-input" name="projectId" id="projectId"
 				lay-verify="required">
 				<option value="">项目名</option>
@@ -22,41 +26,18 @@
 					th:each="project : ${projectList}" th:value="${project.id}"
 					th:text="${project.projectName}"></option>
 			</select>
-		</div>
+		</div> -->
 		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="modelName" id="modelName">
-				<option value="">模块名</option>
-				<option th:selected="${modelName  eq model.modelName}"
-					th:each="model : ${modelList}" th:value="${model.modelName}"
-					th:text="${model.modelName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="devId" id="devId">
-				<option value="">开发人员</option>
-				<option th:selected="${devId  eq dev.id}" th:each="dev : ${devList}"
-					th:value="${dev.id}" th:text="${dev.cnName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="testId" id="testId">
-				<option value="">测试人员</option>
-				<option th:selected="${testId  eq test.id}"
-					th:each="test : ${testList}" th:value="${test.id}"
-					th:text="${test.cnName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="status" id="status" >
-				<option value="">状态</option>
-				<option value="False">False</option>
-				<option value="True">True</option>
+			<select class="layui-input" name="reqmode" id="reqmode" >
+				<option value="">方式</option>
+				<option value="GET">GET</option>
+				<option value="POST">POST</option>
 			</select>
 		</div>
 		<button class="layui-btn" data-type="reload" id="search">搜索</button>
 	</div>
 	<!-- 动态表格 -->
-	<table id="testModel" lay-filter="test"></table>
+	<table id="testStep" lay-filter="test"></table>
 	<!-- 头部按钮 -->
 	<script type="text/html" id="toolbarDemo">
  	 <div class="layui-btn-container">
@@ -73,5 +54,5 @@
 <script src="../../lib/layui/layui.js"></script>
 <script src="../../lib/layui/layui.all.js"></script>
 <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../js/sys/testModel.js"></script>
+<script src="../../js/sys/testStep.js"></script>
 </html>

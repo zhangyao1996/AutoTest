@@ -16,5 +16,12 @@ public class Project implements Serializable{
 	
 	private String projectName;
 	
+	private String projectDesc;
+	
+	private String status;
+	
+	private Long testId;
+	
+	private Long devId;
 }
 

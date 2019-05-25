@@ -27,11 +27,5 @@ public class Model implements Serializable{
 	private Long testId;
 	
 	private Long devId;
-	
-	private User user;
-	
-	private User user1;
-	
-	private Project project;
 }
 

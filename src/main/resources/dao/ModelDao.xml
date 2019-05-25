@@ -10,49 +10,81 @@
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="test_id" jdbcType="BIGINT" property="testId"/>
         <result column="dev_id" jdbcType="BIGINT" property="devId"/>
-        <association property="project" javaType="com.huaxin.entity.Project">
-			<id column="project_id"  property="id"/>
-			<result property="projectName" column="project_name"></result>
-		</association>
-		<association property="user" javaType="com.huaxin.entity.User">
-			<id column="test_id"  property="id"/>
-			<result property="userName" column="user_name"></result>
-		</association>
-		<association property="user1" javaType="com.huaxin.entity.User">
-			<id column="dev_id"  property="id"/>
-			<result property="userName" column="user_name"></result>
-		</association>
     </resultMap>
     
      <sql id="modelColumns">
     	sm.id,
-    	sm.model_name,
+    	sm.model_name AS modelName,
     	sm.project_id,
-    	sm.model_desc,
+    	sm.model_desc AS modelDesc,
     	sm.status,
     	sm.test_id,
     	sm.dev_id,
-    	sp.project_name,
-    	su.user_name,
-    	su.user_name
+    	su.cn_name AS testName,
+    	su2.cn_name AS devName,
+    	sp.project_name AS projectName
     </sql>
-<!--     
-   <select id="getModelList" resultMap="BaseResultMap">
-		SELECT sm.id,
-    	sm.model_name,
-    	sm.project_id,
-    	sm.model_desc,
-    	sm.status,
-    	sm.test_id,
-    	sm.dev_id,
-    	sp.project_name,
-    	su.user_name  ,su2.user_name FROM sys_user su ,sys_model sm ,sys_project sp,sys_user su2 
-    	WHERE  sm.project_id=sp.id AND sm.test_id=su.id 
-	</select> -->
-	    
-   <select id="getModelList" resultType="HashMap">
-	 SELECT sm.id ,sm.model_name AS modelName FROM sys_model sm    
-   </select>
+
+	<select id="searchModelList"  parameterType="Model" resultType="HashMap">
+	SELECT <include refid="modelColumns" />
+	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
+	LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON
+	sm.project_id =sp.id
+	WHERE 1=1
+	<if test="modelName!=null and modelName!=''">AND sm.model_name=#{modelName} </if>
+	<if test="projectId!=null and projectId!=''">AND sm.project_id=#{projectId} </if>
+	<if test="status!=null and status!=''">AND sm.status=#{status} </if>
+	<if test="testId!=null and testId!=''">AND sm.test_id=#{testId} </if>
+	<if test="devId!=null and devId!=''">AND sm.dev_id=#{devId} </if>
+    order by sm.id ASC
+	</select>
+
+	<select id="getModelList"  resultType="HashMap">
+	SELECT <include refid="modelColumns" /> 
+	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
+    LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
+    order by sm.id ASC
+	</select>
+	
+	<insert id="addNewModel">
+	insert into
+	sys_model(model_name,project_id,model_desc,status,test_id,dev_id)
+	values(#{modelName}, #{projectId},#{modelDesc}, #{status}, #{testId},
+	#{devId})
+    </insert>
+    
+    <select id="getModelById" parameterType="java.lang.Long" resultType="HashMap">
+	SELECT <include refid="modelColumns" /> 
+	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
+    LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
+    WHERE sm.id=#{id}
+	</select>
+	
+	
+  	<select id="getModelByModelName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	SELECT * FROM sys_model WHERE model_name=#{modelName}
+	</select>
+	
+	<update id="updateModel">
+	update sys_model set
+	model_name=#{modelName},
+	project_id=#{projectId},
+	model_desc=#{modelDesc},
+	status=#{status},
+	test_id=#{testId},
+	dev_id=#{devId}
+	WHERE id=#{id}
+	</update>
+	
+ 	<delete id="deleteModelById" parameterType="java.lang.Long" >
+ 	delete from sys_model where id=#{id}
+ 	</delete>
+	
+	
+	<delete id="deleteModelByProId" parameterType="java.lang.Long" >
+ 	delete from sys_model where project_id=#{id}
+ 	</delete>
+	
 	
 
 </mapper> 

@@ -14,8 +14,22 @@ import com.huaxin.entity.Model;
 @Mapper
 public interface ModelDao {
 	
+	
+	public List searchModelList(Model model);
 	//获取模块List
-	public List<HashMap> getModelList();
+	public List getModelList();
+
+	public int addNewModel(Model model);
+
+	public HashMap getModelById(Long id);
+
+	public int updateModel(Model model);
+
+	public int deleteModelById(Long id);
+	
+	public Model getModelByModelName(String modelName);
+	
+	public void deleteModelByProId(Long id);
 
 }
 

@@ -38,5 +38,21 @@ public class CaseService {
 	public int doUpdateCase(Case case1) {
 		return caseDao.updateCase(case1);
 	}
+
+	public int doDeleteCaseByModelId(Long id) {
+		return caseDao.deleteCaseByModelId(id);
+	}
+
+	public List<Case> doSearchCaseList(Case case1) {
+		return caseDao.searchCaseList(case1);
+	}
+
+	public void doDeleteCaseByProId(Long id) {
+		caseDao.deleteCaseByProId(id);
+	}
+
+	public Case doGetCaseByCaseName(String caseName) {
+		return caseDao.getCaseByCaseName(caseName);
+	}
 }
 

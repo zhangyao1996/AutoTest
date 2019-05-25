@@ -40,13 +40,29 @@
 		sm.id,
 		sm.model_name
 	</sql>
+	
+	
+	<select id="searchCaseList" parameterType="Case" resultMap="BaseResultMap">
+		SELECT
+		<include refid="caseColumns" />
+		FROM sys_case sc, sys_project sp ,sys_model sm
+		WHERE sp.id =sc.project_id AND sm.id=sc.model_id 
+		<if test="caseName!=null and caseName!=''">AND sc.case_name like '%${caseName}%' </if>
+		<if test="projectId!=null and projectId!=''">AND sc.project_id=#{projectId} </if>
+		<if test="status!=null and status!=''">AND sc.status=#{status} </if>
+		<if test="modelId!=null and modelId!=''">AND sc.model_id=#{modelId} </if>
+		<if test="api!=null and api!=''">AND sc.api=#{api} </if>
+		<if test="version!=null and version!='' ">AND sc.version=#{version} </if>
+        order by sc.id ASC
+	</select>
 
 	<select id="getCaseList" resultMap="BaseResultMap">
 		SELECT
 		<include refid="caseColumns" />
 		FROM sys_case sc, sys_project sp ,sys_model sm
 		WHERE sp.id
-		=sc.project_id AND sm.id=sc.model_id
+		=sc.project_id AND sm.id=sc.model_id 
+        order by sc.id ASC
 	</select>
 
 	<insert id="createNewCase">
@@ -60,6 +76,18 @@
 		delete from sys_case where
 		id=#{id}
 	</delete>
+	
+	
+	<delete id="deleteCaseByModelId" parameterType="java.lang.Long">
+		delete from sys_case where
+		model_id=#{id}
+	</delete>
+	
+	<delete id="deleteCaseByProId" parameterType="java.lang.Long">
+		delete from sys_case where
+		project_id=#{id}
+	</delete>
+	
 
 	<update id="updateCase">
 	update sys_case set
@@ -80,6 +108,16 @@
 		FROM sys_case sc, sys_project sp ,sys_model sm
 		WHERE sp.id
 		=sc.project_id AND sm.id=sc.model_id AND sc.id=#{id}
+	</select>
+	
+	
+	<select id="getCaseByCaseName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="caseColumns" />
+		FROM sys_case sc, sys_project sp ,sys_model sm
+		WHERE sp.id
+		=sc.project_id AND sm.id=sc.model_id AND sc.case_name=#{caseName}
 	</select>
 
 </mapper> 

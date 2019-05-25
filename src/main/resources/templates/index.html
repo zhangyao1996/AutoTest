@@ -14,12 +14,12 @@
 				<i class="fa fa-american-sign-language-interpreting fa-3x" aria-hidden="true"></i>接口测试框架
 			</div>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><a href="">控制台<span
+				<!-- <li class="layui-nav-item"><a href="">控制台<span
 						class="layui-badge">9</span></a></li>
 				<li class="layui-nav-item"><a href="">个人中心<span
-						class="layui-badge-dot"></span></a></li>
+						class="layui-badge-dot"></span></a></li> -->
 				<li class="layui-nav-item"><a href=""><img
-						src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+						src="//t.cn/RCzsdCq" class="layui-nav-img">[[${session.cnName}]]</a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="javascript:;">修改信息</a>
@@ -28,7 +28,7 @@
 							<a href="javascript:;">安全管理</a>
 						</dd>
 						<dd>
-							<a href="javascript:;">退了</a>
+							<a href="/logout">注销</a>
 						</dd>
 					</dl></li>
 			</ul>
@@ -48,18 +48,24 @@
 								<span>测试结果</span></a>
 							</dd>
 							<dd>
-								<a href="javascript:;"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
+								<a href="javascript:;" data-id="1" data-title="测试项目" data-url="interface/testProject"
+                               class="site-demo-active" data-type="tabAdd"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
 									<span>测试项目</span></a>
 							</dd>
 							<dd>
-								<a href="javascript:;" data-id="1" data-title="测试模块" data-url="interface/testModel"
+								<a href="javascript:;" data-id="2" data-title="测试模块" data-url="interface/testModel"
                                class="site-demo-active" data-type="tabAdd"><i class="fa fa-cubes fa-lg" aria-hidden="true"></i>
 									<span>测试模块</span></a>
 							</dd>
 							<dd>
-								<a href="javascript:;" data-id="2" data-title="测试用例" data-url="interface/testCase"
+								<a href="javascript:;" data-id="3" data-title="测试用例" data-url="interface/testCase"
                                class="site-demo-active" data-type="tabAdd"><i class="fa fa-tag fa-lg" aria-hidden="true"></i> 
 								    <span>测试用例</span></a>
+							</dd>
+							<dd>
+								<a href="javascript:;" data-id="4" data-title="测试步骤" data-url="interface/testStep"
+                               class="site-demo-active" data-type="tabAdd"><i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i></i> 
+								    <span>测试步骤</span></a>
 							</dd>
 							<dd>
 								<a href="javascript:;"><i class="fa fa-pie-chart fa-lg" aria-hidden="true"></i>

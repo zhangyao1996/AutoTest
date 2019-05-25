@@ -15,5 +15,17 @@ public interface ProjectDao {
 
 	//获取项目list
 	public List<Project> getProjectList();
+
+	public List searchProjectList(Project project);
+
+	public Project getProjectByName(String projectName);
+
+	public int addNewProject(Project project);
+
+	public Project getProjectById(Long id);
+
+	public int updateProject(Project project);
+
+	public void deleteProById(Long id);
 }
 

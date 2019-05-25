@@ -1,37 +1,37 @@
 
   //隐藏text block，显示password block
-    function hideShowPsw(){
-            if (password.type == "password") {
-                    password.type = "text";
-                    eye.className='fa fa-eye-slash'
-            }else {
-                    password.type = "password";
-                    eye.className='fa fa-eye'
-            }
-        }
+function hideShowPsw() {
+	if (password.type == "password") {
+		password.type = "text";
+		eye.className = 'fa fa-eye-slash'
+	} else {
+		password.type = "password";
+		eye.className = 'fa fa-eye'
+	}
+}
 
 layui.use([ 'form', 'layer', 'jquery' ], function() {
 	// 操作对象
-	var layer = layui.layer
+	var layer = layui.layer;
 	var form = layui.form;
 	var $ = layui.jquery;
 	//密码显示
-	var eye = document.getElementById("eye");
-    var password = document.getElementById("password");
+	//var eye = document.getElementById("eye");
+   // var password = document.getElementById("password");
 	
 	form.on('submit(login)', function(data) {
 		// console.log(data.field);
 		var username = $("#username").val(); // 用户名
 		var password = $("#password").val(); // 密码
-		// layer.alert(username);
+		
 		$.ajax({
 			url : '../../login',
 			type : 'post',
 			dataType : 'json',
 			contentType : 'application/json;charset=UTF-8',
 			data : JSON.stringify({
-				userName : username,
-				password : password
+				userName:username,
+				password:password
 			}),
 			success : function(data) {
 				if (data.msg == "success") {
@@ -40,8 +40,8 @@ layui.use([ 'form', 'layer', 'jquery' ], function() {
 					location.href = "../../index";
 				} else {
 					//layer.alert("登陆失败");
-					if (data.msg == "账号不存在！") {
-						layer.tips('账号不存在！', '#username', {
+					if (data.msg == "账号不存在!") {
+						layer.tips('账号不存在！请联系管理员注册', '#username', {
 							tips : [ 2, '#FF3030' ],
 							time : 2000
 						});

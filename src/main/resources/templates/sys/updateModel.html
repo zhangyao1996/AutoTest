@@ -2,20 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>编辑用例</title>
+<title>编辑模块</title>
 <link rel="stylesheet" th:href="@{../../lib/layui/css/layui.css}" />
 </head>
 <div class=" layui-main ">
 	<form class="layui-form">
 		<div class="layui-form-item">
-            <input type="text" th:value="${case.id}" name="id" id="id" hidden="hidden">
+            <input type="text" th:value="${model.id}" name="id" id="id" hidden="hidden">
         </div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">用例名 ：</label>
+			<label class="layui-form-label">模块名 ：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="casename" id="casename"   lay-verify="required"
-					placeholder="请输入用例名" autocomplete="off" class="layui-input"
-				   style="width: 300px" th:value="${case.caseName}">
+				<input type="text" name="modelname" id="modelname"  lay-verify="required"
+					placeholder="请输入模块名" autocomplete="off" class="layui-input"
+				   style="width: 300px" th:value="${model.modelName}">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -30,38 +30,33 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">模块名 ：</label>
+			<label class="layui-form-label">测试人员：</label>
 			<div class="layui-input-inline">
-				<select name="modelId" id="modelId" lay-verify="required" lay-filter="modelId">
+				<select name="testId" id="testId" lay-verify="required" lay-filter="testId">
 					<option value="">请选择</option>
-					<option th:selected="${modelId  eq model.id}"
-						th:each="model : ${modelList}" th:value="${model.id}"
-						th:text="${model.modelName}"></option>
+					<option th:selected="${testId  eq test.id}"
+						th:each="test : ${testList}" th:value="${test.id}"
+						th:text="${test.cnName}"></option>
 				</select>
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">api：</label>
+			<label class="layui-form-label">开发人员：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="api" id="api"  lay-verify="required"
-					placeholder="请输入api" autocomplete="off" class="layui-input"
-				 style="width: 300px" th:value="${case.api}">
+				<select name="devId" id="devId" lay-verify="required" lay-filter="devId">
+					<option value="">请选择</option>
+					<option th:selected="${devId  eq dev.id}"
+						th:each="dev : ${devList}" th:value="${dev.id}"
+						th:text="${dev.cnName}"></option>
+				</select>
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">版本：</label>
+			<label class="layui-form-label">模块描述：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="version" id="version"   lay-verify="required"
-					placeholder="请输入版本" autocomplete="off" class="layui-input"
-			    style="width: 300px" th:value="${case.version}">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">用例描述：</label>
-			<div class="layui-input-inline">
-				<input type="text" name="casedesc" id="casedesc"
-					placeholder="请输入用例描述" autocomplete="off" class="layui-input"
-				 style="width: 300px" th:value="${case.caseDesc}">
+				<input type="text" name="modeldesc" id="modeldesc" 
+					placeholder="请输入模块描述" autocomplete="off" class="layui-input"
+				 style="width: 300px" th:value="${model.modelDesc}">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -81,6 +76,6 @@
 	</form>
 </div>
 <script type="text/javascript" src="../../lib/layui/layui.js"></script>
-<script type="text/javascript" src="../../js/sys/updateCase.js"></script>
+<script type="text/javascript" src="../../js/sys/updateModel.js"></script>
 </body>
 </html>

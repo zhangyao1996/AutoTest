@@ -5,11 +5,66 @@
 	 <resultMap id="BaseResultMap" type="com.huaxin.entity.Project">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_desc" jdbcType="VARCHAR" property="projectDesc"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="test_id" jdbcType="BIGINT" property="testId"/>
+        <result column="dev_id" jdbcType="BIGINT" property="devId"/>
     </resultMap>
     
+    <sql id="projectColumns">
+		sp.id,
+		sp.project_name AS projectName,
+		sp.project_desc AS projectDesc,
+		sp.status AS status,
+		su.cn_name AS testName,
+		su1.cn_name AS devName
+	</sql>
     
     <select id="getProjectList" resultMap="BaseResultMap">
 		SELECT * FROM sys_project
+	</select>
+	
+	<!--都必须返回resultType或者resultMap的值，否则就会报错的  -->
+	<select id="getProjectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * FROM sys_project WHERE project_name=#{projectName}
+	</select>
+	
+	<select id="getProjectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT * FROM sys_project WHERE id=#{id}
+	</select>
+	
+	<insert id="addNewProject" parameterType="Project">
+		INSERT INTO sys_project(project_name,test_id,dev_id,project_desc,status) 
+		values(#{projectName},#{testId},#{devId},#{projectDesc},#{status})
+	</insert>
+	
+	<delete id="deleteProById" parameterType="java.lang.Long">
+ 	delete from sys_project where id=#{id}
+ 	</delete>
+	
+	
+	<update id="updateProject" parameterType="Project">
+		update sys_project SET
+		project_name=#{projectName},
+		test_id=#{testId},
+		dev_id=#{devId},
+		project_desc=#{projectDesc},
+		status=#{status}
+		WHERE id=#{id}
+	</update>
+
+	<select id="searchProjectList" parameterType="Project" resultType="HashMap">
+	SELECT
+	<include refid="projectColumns" />
+	FROM sys_project sp LEFT JOIN sys_user su ON sp.test_id=su.id
+	LEFT JOIN
+	sys_user su1 ON sp.dev_id=su1.id 
+	WHERE 1=1
+	<if test="projectName!=null and projectName!=''">AND sp.project_name like '%${projectName}%' </if>
+	<if test="status!=null and status!=''">AND sp.status=#{status} </if>
+	<if test="testId!=null and testId!=''">AND sp.test_id=#{testId} </if>
+	<if test="devId!=null and devId!=''">AND sp.dev_id=#{devId} </if>
+	order by sp.id ASC
 	</select>
 	
 	<!-- <select id="getCaseList" resultMap="BaseResultMap">
