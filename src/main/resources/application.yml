@@ -12,8 +12,8 @@ spring:
 #      filter: stat
       #mysql驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
-      #基本属性-已修改
-      url: jdbc:mysql://10.10.1.98:3306/autoapi?serverTimezone=UTC
+      #基本属性
+      url: jdbc:mysql://10.10.1.98:3306/autoapi?serverTimezone=UTC&characterEncoding=UTF-8
       username: wucenlong
       password: y88y9A
       #配置初始化大小/最小/最大

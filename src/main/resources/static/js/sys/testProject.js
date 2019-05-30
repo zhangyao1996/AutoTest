@@ -12,11 +12,12 @@ layui.use('table', function(){
     ,cols: [[ //表头
     	 {type:'checkbox'}
       ,{field: 'id', title: 'ID', width:'5%'}
-      ,{field: 'projectName', title: '项目名', width:'20%'}
-      ,{field: 'testName', title: '测试人员', width: '20%'}
-      ,{field: 'devName', title: '开发人员', width: '20%'}
-      ,{field: 'projectDesc', title: '项目描述', width: '20%'}
-      ,{field: 'status', title: '状态', width: '12%'}
+      ,{field: 'projectName', title: '项目名', width:'15%'}
+      ,{field: 'projectDesc', title: '项目描述', width: '15%'}
+      ,{field: 'testEnv', title: '测试环境', width: '30%'}
+      ,{field: 'devEnv', title: '开发环境', width: '30%'}
+      // ,{field: 'testName', title: '测试人员', width: '10%'}
+      // ,{field: 'devName', title: '开发人员', width: '10%'}
     ]]
   });
   

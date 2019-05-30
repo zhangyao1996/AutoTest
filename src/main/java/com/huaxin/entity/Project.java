@@ -17,11 +17,15 @@ public class Project implements Serializable{
 	private String projectName;
 	
 	private String projectDesc;
+
+	private String testEnv;
+
+	private String devEnv;
 	
-	private String status;
-	
+//	private String status;
+
 	private Long testId;
-	
+
 	private Long devId;
 }
 

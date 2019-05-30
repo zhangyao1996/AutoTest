@@ -53,8 +53,7 @@ layui.use([ 'form', 'jquery' ], function() {
 					projectId : projectId,
 					testId : testId,
 					devId : devId,
-					modelDesc : modeldesc,
-					status : status
+					modelDesc : modeldesc
 				}),
 				success : function(data) {
 					if (data.result == true) {
