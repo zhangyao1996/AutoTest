@@ -28,8 +28,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">项目名：</label>
+			<input type="hidden" id="projectName" th:value="${model.projectId}" />
 			<div class="layui-input-inline">
-				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId" th:field="${projectName}" th:value="${projectName}">
+				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId">
 					<!--<option value="">请选择</option>-->
 					<option th:selected="${projectId  eq project.id}"
 						th:each="project : ${projectList}" th:value="${project.id}"
@@ -39,8 +40,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">测试人员：</label>
+			<input type="hidden" id="testPerson" th:value="${model.testId}" />
 			<div class="layui-input-inline">
-				<select name="testId" id="testId" lay-verify="required" lay-filter="testId" th:field="${testName}" th:value="${testName}">
+				<select name="testId" id="testId" lay-verify="required" lay-filter="testId">
 					<!--<option value="">请选择</option>-->
 					<option th:selected="${test_id  eq test.id}"
 						th:each="test : ${testList}" th:value="${test.id}"
@@ -50,9 +52,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">开发人员：</label>
+			<input type="hidden" id="devPerson" th:value="${model.devId}" />
 			<div class="layui-input-inline">
-				<select name="devId" id="devId" lay-verify="required" lay-filter="devId" th:field="*{devName}">
-					<!--<option th:field="${devName}" th:value="${devName}"></option>-->
+				<select name="devId" id="devId" lay-verify="required" lay-filter="devId">
 					<option th:selected="${devId  eq dev.id}"
 						th:each="dev : ${devList}" th:value="${dev.id}"
 						th:text="${dev.cnName}"></option>
