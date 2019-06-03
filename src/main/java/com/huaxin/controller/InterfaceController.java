@@ -347,7 +347,7 @@ public class InterfaceController {
 	public String toUpdateModelPage(@RequestParam(value = "id", required = false) Long id, Model model) {
 
 		// 获取model
-		HashMap model2 = modelService.doGetModelById(id);
+		HashMap<String, Object> model2 = modelService.doGetModelById(id);
 
 		// 获取项目list
 		List projectList = projectService.doGetProjectList();

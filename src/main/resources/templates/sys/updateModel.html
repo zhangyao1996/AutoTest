@@ -20,6 +20,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">项目名：</label>
+			<input type="hidden" id="projectName" th:value="${model.projectId}" />
 			<div class="layui-input-inline">
 				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId">
 					<option value="">请选择</option>
@@ -31,6 +32,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">测试人员：</label>
+			<input type="hidden" id="testPerson" th:value="${model.testId}" />
 			<div class="layui-input-inline">
 				<select name="testId" id="testId" lay-verify="required" lay-filter="testId">
 					<option value="">请选择</option>
@@ -42,6 +44,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">开发人员：</label>
+			<input type="hidden" id="devPerson" th:value="${model.devId}" />
 			<div class="layui-input-inline">
 				<select name="devId" id="devId" lay-verify="required" lay-filter="devId">
 					<option value="">请选择</option>
