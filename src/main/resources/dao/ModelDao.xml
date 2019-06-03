@@ -11,18 +11,19 @@
         <result column="test_id" jdbcType="BIGINT" property="testId"/>
         <result column="dev_id" jdbcType="BIGINT" property="devId"/>
     </resultMap>
-    
-     <sql id="modelColumns">
-    	sm.id,
-    	sm.model_name AS modelName,
-    	sm.project_id,
-    	sm.model_desc AS modelDesc,
-    	sm.test_id,
-    	sm.dev_id,
-    	su.cn_name AS testName,
-    	su2.cn_name AS devName,
-    	sp.project_name AS projectName
-    </sql>
+
+	<sql id="modelColumns">
+		sm.id,
+		sm.model_name AS modelName,
+		sm.project_id AS projectId,
+		sm.model_desc AS modelDesc,
+		sm.status,
+		sm.test_id AS testId,
+		sm.dev_id AS devId,
+		su.cn_name AS testName,
+		su2.cn_name AS devName,
+		sp.project_name AS projectName
+	</sql>
 
 	<select id="searchModelList"  parameterType="Model" resultType="HashMap">
 	SELECT <include refid="modelColumns" />

@@ -1,8 +1,13 @@
 layui.use([ 'form', 'jquery' ], function() {
 	var form = layui.form;
 	var $ = layui.jquery;
-	
-	// 验证规则
+
+    $("#devId").find("option[value='"+$("#devPerson").val()+"']").attr("selected",true);
+    $("#testId").find("option[value='"+$("#testPerson").val()+"']").attr("selected",true);
+    $("#projectId").find("option[value='"+$("#projectName").val()+"']").attr("selected",true);
+    form.render('select');
+
+    // 验证规则
 //	form.verify({
 //		username : [ /^[a-zA-Z0-9]{4,12}$/, '用户名必须是4-16位的字母与数字' ],
 //		password : [ /^[a-zA-Z0-9]{4,16}$/, '密码必须是4-16位的字母与数字' ],
