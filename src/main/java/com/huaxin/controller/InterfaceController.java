@@ -75,14 +75,14 @@ public class InterfaceController {
 			@RequestParam(value = "limit", required = false) int limit,
 			@RequestParam(value = "modelName", required = false) String modelName,
 			@RequestParam(value = "projectId", required = false) Long projectId,
-			@RequestParam(value = "status", required = false) String status,
+			//@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "testId", required = false) Long testId,
 			@RequestParam(value = "devId", required = false) Long devId) {
 
 		com.huaxin.entity.Model model = new com.huaxin.entity.Model();
 		model.setModelName(modelName);
 		model.setProjectId(projectId);
-		model.setStatus(status);
+		//model.setStatus(status);
 		model.setTestId(testId);
 		model.setDevId(devId);
 		// 分页设置
@@ -345,10 +345,16 @@ public class InterfaceController {
 	// 获取编辑模块页面
 	@RequestMapping("/toUpdateModel")
 	public String toUpdateModelPage(@RequestParam(value = "id", required = false) Long id, Model model) {
-
+		//com.huaxin.entity.Model model1=new com.huaxin.entity.Model();
 		// 获取model
 		HashMap model2 = modelService.doGetModelById(id);
 
+		String testName=(String) model2.get("testName");
+		String devName=(String) model2.get("devName");
+		String projectName= (String)model2.get("projectName");
+		model.addAttribute("testName", testName);
+		model.addAttribute("devName", devName);
+		model.addAttribute("projectName", projectName);
 		// 获取项目list
 		List projectList = projectService.doGetProjectList();
 
@@ -367,11 +373,11 @@ public class InterfaceController {
 	@PostMapping("/updateModel")
 	@ResponseBody
 	public HashMap toUpdateModel(@RequestBody(required = false) com.huaxin.entity.Model model) {
-		if (model.getStatus() != null) {
-			model.setStatus("True");
-		} else {
-			model.setStatus("False");
-		}
+//		if (model.getStatus() != null) {
+//			model.setStatus("True");
+//		} else {
+//			model.setStatus("False");
+//		}
 		HashMap map = new HashMap<>();
 		HashMap oldModel = modelService.doGetModelById(model.getId());
 		com.huaxin.entity.Model newModel = modelService.doGetModelByModelName(model.getModelName());
@@ -436,7 +442,6 @@ public class InterfaceController {
 	public HashMap toGetTestProjectList(@RequestParam(value = "page", required = false) int page,
 			@RequestParam(value = "limit", required = false) int limit,
 			@RequestParam(value = "projectName", required = false) String projectName,
-			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "testId", required = false) Long testId,
 			@RequestParam(value = "devId", required = false) Long devId) {
 
@@ -446,7 +451,7 @@ public class InterfaceController {
 		project.setDevId(devId);
 		project.setProjectName(projectName);
 		project.setTestId(testId);
-		project.setStatus(status);
+//		project.setStatus(status);
 		List projectList = projectService.doSearchProjectList(project);
 		// 获取分页数据
 		PageInfo<HashMap> pageInfo = new PageInfo<HashMap>(projectList);
@@ -479,11 +484,11 @@ public class InterfaceController {
 	public HashMap toAddProject(@RequestBody(required = false) Project project) {
 
 		HashMap map = new HashMap<>();
-		if (project.getStatus() != null) {
-			project.setStatus("True");
-		} else {
-			project.setStatus("False");
-		}
+//		if (project.getStatus() != null) {
+//			project.setStatus("True");
+//		} else {
+//			project.setStatus("False");
+//		}
 
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());
 		if (project2 != null) {
@@ -522,11 +527,11 @@ public class InterfaceController {
 	public HashMap toUpdateProject(@RequestBody(required = false) Project project) {
 
 		HashMap map = new HashMap<>();
-		if (project.getStatus() != null) {
-			project.setStatus("True");
-		} else {
-			project.setStatus("False");
-		}
+//		if (project.getStatus() != null) {
+//			project.setStatus("True");
+//		} else {
+//			project.setStatus("False");
+//		}
 
 		Project oldProject = projectService.doGetProjectById(project.getId());
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());

@@ -18,28 +18,28 @@
 			<input class="layui-input" id="projectname" autocomplete="off"
 				placeholder="项目名">
 		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="devId" id="devId">
-				<option value="">开发人员</option>
-				<option th:selected="${devId  eq dev.id}" th:each="dev : ${devList}"
-					th:value="${dev.id}" th:text="${dev.cnName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="testId" id="testId">
-				<option value="">测试人员</option>
-				<option th:selected="${testId  eq test.id}"
-					th:each="test : ${testList}" th:value="${test.id}"
-					th:text="${test.cnName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="status" id="status" >
-				<option value="">状态</option>
-				<option value="False">False</option>
-				<option value="True">True</option>
-			</select>
-		</div>
+		<!--<div class="layui-input-inline" style="width: 100px;">-->
+			<!--<select class="layui-input" name="devId" id="devId">-->
+				<!--<option value="">开发人员</option>-->
+				<!--<option th:selected="${devId  eq dev.id}" th:each="dev : ${devList}"-->
+					<!--th:value="${dev.id}" th:text="${dev.cnName}"></option>-->
+			<!--</select>-->
+		<!--</div>-->
+		<!--<div class="layui-input-inline" style="width: 100px;">-->
+			<!--<select class="layui-input" name="testId" id="testId">-->
+				<!--<option value="">测试人员</option>-->
+				<!--<option th:selected="${testId  eq test.id}"-->
+					<!--th:each="test : ${testList}" th:value="${test.id}"-->
+					<!--th:text="${test.cnName}"></option>-->
+			<!--</select>-->
+		<!--</div>-->
+		<!--<div class="layui-input-inline" style="width: 100px;">-->
+			<!--<select class="layui-input" name="status" id="status" >-->
+				<!--<option value="">状态</option>-->
+				<!--<option value="False">False</option>-->
+				<!--<option value="True">True</option>-->
+			<!--</select>-->
+		<!--</div>-->
 		<button class="layui-btn" data-type="reload" id="search">搜索</button>
 	</div>
 	<!-- 动态表格 -->
