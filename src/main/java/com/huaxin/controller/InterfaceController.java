@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huaxin.entity.Case;
@@ -488,13 +487,13 @@ public class InterfaceController {
 	@RequestMapping("/addProject")
 	@ResponseBody
 	public HashMap toAddProject(@RequestBody(required = false) Project project) {
-
+//
 		HashMap map = new HashMap<>();
-		if (project.getStatus() != null) {
-			project.setStatus("True");
-		} else {
-			project.setStatus("False");
-		}
+//		if (project.getStatus() != null) {
+//			project.setStatus("True");
+//		} else {
+//			project.setStatus("False");
+//		}
 
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());
 		if (project2 != null) {
@@ -533,11 +532,11 @@ public class InterfaceController {
 	public HashMap toUpdateProject(@RequestBody(required = false) Project project) {
 
 		HashMap map = new HashMap<>();
-		if (project.getStatus() != null) {
-			project.setStatus("True");
-		} else {
-			project.setStatus("False");
-		}
+//		if (project.getStatus() != null) {
+//			project.setStatus("True");
+//		} else {
+//			project.setStatus("False");
+//		}
 
 		Project oldProject = projectService.doGetProjectById(project.getId());
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());
