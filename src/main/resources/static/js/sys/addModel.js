@@ -40,7 +40,7 @@ layui.use([ 'form', 'jquery' ], function() {
 		var devId = $("#devId").val();
 		var modeldesc = $("#modeldesc").val();
 		//var status = $("#status").val();
-		var status = $("input[name='status']:checked").val();
+		//var status = $("input[name='status']:checked").val();
 		
 		//console.log(modelname+projectId);
 			$.ajax({
@@ -54,7 +54,7 @@ layui.use([ 'form', 'jquery' ], function() {
 					testId : testId,
 					devId : devId,
 					modelDesc : modeldesc,
-					status : status
+					//status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {

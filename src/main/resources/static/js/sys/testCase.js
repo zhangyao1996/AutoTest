@@ -1,6 +1,38 @@
-layui.use('table', function(){
+layui.use(['table','form', 'jquery'], function(){
   var table = layui.table;
-  
+//  var form = layui.form;
+//  var $ = layui.jquery;
+//  
+//  
+//  form.on('select(project)', function(data) {
+//	  console.log("data"+data.value);
+//		$.ajax({
+//			type : 'POST',
+//			url : '../../interface/toGetModelListByProId',
+//			data : {
+//				projectId : data.value
+//			},
+//			dataType : 'json',
+//			async : true,
+//			success : function(datas) {
+//				if (datas.length > 0) {
+//					var option = '<option value="">请选择</option>';
+//					for (var i = 0; i < datas.length; i++) {
+//						option += "<option value='" + datas[i].id + "'>"
+//								+ datas[i].modelName + "</option>";
+//					}
+//				} else {
+//					var option = '<option value="">请选择</option>'; // 默认值
+//				}
+//				console.log(option);
+//				$("#modelId").html("");
+//				$("#modelId").append(option);
+//				form.render('select');
+//			}
+//
+//		})
+//	})
+//  
   //第一个实例
   table.render({
     elem: '#testCase'
@@ -16,9 +48,9 @@ layui.use('table', function(){
       ,{field: 'projectName', title: '项目名', width:'10%'}
       ,{field: 'modelName', title: '模块名', width:'10%'} 
       ,{field: 'api', title: 'api', width: '20%'}
-      ,{field: 'version', title: '版本', width: '6%'}
+      ,{field: 'version', title: '版本', width: '20%'}
       ,{field: 'caseDesc', title: '用例描述', width: '20%'}
-      ,{field: 'status', title: '状态', width: '11%'}
+  //  ,{field: 'status', title: '状态', width: '11%'}
     ]]
   });
   
@@ -31,7 +63,7 @@ layui.use('table', function(){
 				var modelId=$("#modelId").val();
 				var api=$("#api").val();
 				var version=$("#version").val();
-				var status=$("#status").val();
+			//	var status=$("#status").val();
 				var index=layer.msg('查询中，请稍后。。。',{icon:16,time:false,shade:0});
 				setTimeout(function() {
 				 table.reload('tableDate', {//执行table重载
@@ -47,7 +79,7 @@ layui.use('table', function(){
 						modelId:modelId,
 						api:api,
 						version:version,
-						status:status,
+					//	status:status,
 					}
 				});
 				 layer.close(index);

@@ -1,7 +1,6 @@
 
 server:
   port: 8080
-
 spring:
   datasource:
     name: springboot
@@ -13,9 +12,9 @@ spring:
       #mysql驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:3306/autotest?serverTimezone=UTC 
-      username: root
-      password: 123456
+      url: jdbc:mysql://10.10.1.98:3306/autoapi?serverTimezone=UTC&characterEncoding=UTF-8
+      username: wucenlong
+      password: y88y9A
       #配置初始化大小/最小/最大
       initial-size: 1
       min-idle: 1
@@ -52,6 +51,9 @@ spring:
     #启用@Aspectj注解驱动的切面，允许Spring创建基于类的代理
     auto: true
     proxy-target-class: true
+  mvc:
+    favicon:
+      enabled: false
 
 
 #mybatis配置

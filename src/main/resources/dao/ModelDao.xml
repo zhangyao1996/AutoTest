@@ -38,11 +38,19 @@
 	<if test="devId!=null and devId!=''">AND sm.dev_id=#{devId} </if>
     order by sm.id ASC
 	</select>
-
+	
 	<select id="getModelList"  resultType="HashMap">
 	SELECT <include refid="modelColumns" /> 
 	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
     LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
+    order by sm.id ASC
+	</select>
+
+	<select id="getModelByProjectId"  parameterType="java.lang.Long" resultType="HashMap">
+	SELECT <include refid="modelColumns" /> 
+	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
+    LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
+    WHERE sm.project_id=#{projectId}
     order by sm.id ASC
 	</select>
 	

@@ -37,6 +37,41 @@ layui.use([ 'form', 'jquery' ], function() {
 		  $("#roleId").val(data.value)
 		});*/
 	
+	form.on('select(project)', function(data) {
+		//alert("AAAA");
+		var projectId = $("#projectId").val();
+		var test = $("#casename").val();
+		console.log("value" + data.value);
+		console.log("projectId:" + projectId);
+		console.log("test:" + test);
+		$.ajax({
+			type : 'POST',
+			url : '../../interface/toGetModelListByProId',
+			data : {
+				projectId : projectId
+			},
+			dataType : 'json',
+			async : true,
+			success : function(datas) {
+				if (datas.length > 0) {
+					var option = '<option value="">请选择</option>';
+					for (var i = 0; i < datas.length; i++) {
+						option += "<option value='" + datas[i].id + "'>"
+								+ datas[i].modelName + "</option>";
+					}
+				} else {
+					var option = '<option value="">请选择</option>'; // 默认值
+				}
+
+				$("#modelId").html("");
+				$("#modelId").append(option);
+console.log(option);
+				form.render('select');
+			}
+
+		})
+	})
+	
 	
 	form.on('submit(update)', function(data) {
 		// console.log(data.field);
@@ -48,7 +83,7 @@ layui.use([ 'form', 'jquery' ], function() {
 		var version = $("#version").val();
 		var casedesc = $("#casedesc").val();
 		//var status = $("#status").val();
-		var status = $("input[name='status']:checked").val();
+		//var status = $("input[name='status']:checked").val();
 		
 			$.ajax({
 				url : '../../interface/updateCase',
@@ -63,7 +98,7 @@ layui.use([ 'form', 'jquery' ], function() {
 					api : api,
 					version : version,
 					caseDesc : casedesc,
-					status : status
+			//		status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {

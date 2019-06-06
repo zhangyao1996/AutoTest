@@ -8,20 +8,23 @@
 <div class=" layui-main ">
 	<form class="layui-form">
 		<div class="layui-form-item">
-            <input type="text" th:value="${case.id}" name="id" id="id" hidden="hidden">
-        </div>
+			<input type="text" th:value="${case.id}" name="id" id="id"
+				hidden="hidden">
+		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">用例名 ：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="casename" id="casename"   lay-verify="required"
-					placeholder="请输入用例名" autocomplete="off" class="layui-input"
-				   style="width: 300px" th:value="${case.caseName}">
+				<input type="text" name="casename" id="casename"
+					lay-verify="required" placeholder="请输入用例名" autocomplete="off"
+					class="layui-input" style="width: 300px"
+					th:value="${case.caseName}">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">项目名：</label>
 			<div class="layui-input-inline">
-				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId">
+				<select name="projectId" id="projectId" lay-verify="required"
+					lay-filter="project" th:field="${case.projectId}"  th:value="${case.projectId}">
 					<option value="">请选择</option>
 					<option th:selected="${projectId  eq project.id}"
 						th:each="project : ${projectList}" th:value="${project.id}"
@@ -31,8 +34,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">模块名 ：</label>
-			<div class="layui-input-inline">
-				<select name="modelId" id="modelId" lay-verify="required" lay-filter="modelId">
+			<div class="layui-input-inline" lay-filter="model">
+				<select name="modelId" id="modelId" lay-verify="required" th:field="${case.modelId}"  
+				th:value="${case.modelId}">
 					<option value="">请选择</option>
 					<option th:selected="${modelId  eq model.id}"
 						th:each="model : ${modelList}" th:value="${model.id}"
@@ -43,17 +47,17 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">api：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="api" id="api"  lay-verify="required"
+				<input type="text" name="api" id="api" lay-verify="required"
 					placeholder="请输入api" autocomplete="off" class="layui-input"
-				 style="width: 300px" th:value="${case.api}">
+					style="width: 300px" th:value="${case.api}">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">版本：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="version" id="version"   lay-verify="required"
+				<input type="text" name="version" id="version" lay-verify="required"
 					placeholder="请输入版本" autocomplete="off" class="layui-input"
-			    style="width: 300px" th:value="${case.version}">
+					style="width: 300px" th:value="${case.version}">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -61,20 +65,21 @@
 			<div class="layui-input-inline">
 				<input type="text" name="casedesc" id="casedesc"
 					placeholder="请输入用例描述" autocomplete="off" class="layui-input"
-				 style="width: 300px" th:value="${case.caseDesc}">
+					style="width: 300px" th:value="${case.caseDesc}">
 			</div>
 		</div>
-		<div class="layui-form-item">
+		<!-- <div class="layui-form-item">
 			<label class="layui-form-label"></label>
 			<div class="layui-input-inline">
-				<input type="checkbox" name="status" id="status" title="状态" lay-skin="primary"
-					checked>
+				<input type="checkbox" name="status" id="status" title="状态"
+					lay-skin="primary" checked>
 			</div>
-		</div>
+		</div> -->
 		<br>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button lay-submit lay-filter="update" type="button" class="layui-btn">立即提交</button>
+				<button lay-submit lay-filter="update" type="button"
+					class="layui-btn">立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>

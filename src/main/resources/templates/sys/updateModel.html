@@ -20,9 +20,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">项目名：</label>
-			<input type="hidden" id="projectName" th:value="${model.projectId}" />
+			<!-- <input type="hidden" id="projectName" th:value="${model.projectId}" /> -->
 			<div class="layui-input-inline">
-				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId">
+				<select name="projectId" id="projectId" lay-verify="required" lay-filter="projectId" th:field="${model.projectId}"  th:value="${model.projectId}">
 					<option value="">请选择</option>
 					<option th:selected="${projectId  eq project.id}"
 						th:each="project : ${projectList}" th:value="${project.id}"
@@ -32,9 +32,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">测试人员：</label>
-			<input type="hidden" id="testPerson" th:value="${model.testId}" />
+		<!-- 	<input type="hidden" id="testPerson" th:value="${model.testId}" /> -->
 			<div class="layui-input-inline">
-				<select name="testId" id="testId" lay-verify="required" lay-filter="testId">
+				<select name="testId" id="testId" lay-verify="required" lay-filter="testId" th:field="${model.testId}"  th:value="${model.testId}" >
 					<option value="">请选择</option>
 					<option th:selected="${testId  eq test.id}"
 						th:each="test : ${testList}" th:value="${test.id}"
@@ -44,9 +44,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">开发人员：</label>
-			<input type="hidden" id="devPerson" th:value="${model.devId}" />
+		<!-- 	<input type="hidden" id="devPerson" th:value="${model.devId}" /> -->
 			<div class="layui-input-inline">
-				<select name="devId" id="devId" lay-verify="required" lay-filter="devId">
+				<select name="devId" id="devId" lay-verify="required" lay-filter="devId" th:field="${model.devId}"  th:value="${model.devId}">
 					<option value="">请选择</option>
 					<option th:selected="${devId  eq dev.id}"
 						th:each="dev : ${devList}" th:value="${dev.id}"
@@ -62,13 +62,13 @@
 				 style="width: 300px" th:value="${model.modelDesc}">
 			</div>
 		</div>
-		<div class="layui-form-item">
+	<!-- 	<div class="layui-form-item">
 			<label class="layui-form-label"></label>
 			<div class="layui-input-inline">
 				<input type="checkbox" name="status" id="status" title="状态" lay-skin="primary"
 					checked>
 			</div>
-		</div>
+		</div> -->
 		<br>
 		<div class="layui-form-item">
 			<div class="layui-input-block">

@@ -19,7 +19,7 @@ layui.use('table', function(){
       ,{field: 'param', title: '参数', width: '20%'}
       ,{field: 'assert', title: '断言', width: '20%'}
       ,{field: 'stepDesc', title: '步骤描述', width: '20%'}
-      ,{field: 'status', title: '状态', width: '10%'}
+     // ,{field: 'status', title: '状态', width: '10%'}
     ]]
   });
   

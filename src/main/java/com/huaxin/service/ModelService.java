@@ -36,7 +36,6 @@ public class ModelService {
 
 	// 获取model
 	public HashMap doGetModelById(Long id) {
-		// TODO Auto-generated method stub
 		return modelDao.getModelById(id);
 	}
 
@@ -56,6 +55,10 @@ public class ModelService {
 
 	public void doDeleteModelByProId(Long id) {
 		modelDao.deleteModelByProId(id);
+	}
+
+	public List doGetModelByProjectId(Long projectId) {
+		return modelDao.getModelByProjectId(projectId);
 	}
 
 }

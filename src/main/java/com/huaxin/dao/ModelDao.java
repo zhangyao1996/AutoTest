@@ -30,6 +30,8 @@ public interface ModelDao {
 	public Model getModelByModelName(String modelName);
 	
 	public void deleteModelByProId(Long id);
+	
+	public List getModelByProjectId(Long projectId);
 
 }
 

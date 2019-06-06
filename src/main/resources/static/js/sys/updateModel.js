@@ -7,10 +7,10 @@ layui.use([ 'form', 'jquery' ], function() {
 //	var devId=$("#devId").val();
 //	alert(devId);
 
-	$("#devId").find("option[value='"+$("#devPerson").val()+"']").attr("selected",true);
-	$("#testId").find("option[value='"+$("#testPerson").val()+"']").attr("selected",true);
-	$("#projectId").find("option[value='"+$("#projectName").val()+"']").attr("selected",true);
-	form.render('select');
+//	$("#devId").find("option[value='"+$("#devPerson").val()+"']").attr("selected",true);
+//	$("#testId").find("option[value='"+$("#testPerson").val()+"']").attr("selected",true);
+//	$("#projectId").find("option[value='"+$("#projectName").val()+"']").attr("selected",true);
+//	form.render('select');
 //	var devName="${model.devName}";
 //	alert(devName);
 //	 $("#devId").atr("你好");
@@ -69,7 +69,7 @@ layui.use([ 'form', 'jquery' ], function() {
 					testId : testId,
 					devId : devId,
 					modelDesc : modeldesc,
-					status : status
+			//		status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {
