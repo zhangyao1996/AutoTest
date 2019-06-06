@@ -78,7 +78,7 @@ layui.use([ 'form', 'jquery' ], function() {
 		var version = $("#version").val();
 		var casedesc = $("#casedesc").val();
 		//var status = $("#status").val();
-		var status = $("input[name='status']:checked").val();
+		//var status = $("input[name='status']:checked").val();
 		
 			$.ajax({
 				url : '../../interface/addStep',
@@ -92,7 +92,7 @@ layui.use([ 'form', 'jquery' ], function() {
 					api : api,
 					version : version,
 					caseDesc : casedesc,
-					status : status
+				//	status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {

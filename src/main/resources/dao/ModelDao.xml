@@ -7,49 +7,58 @@
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="project_id" jdbcType="BIGINT" property="projectId"/>
         <result column="model_desc" jdbcType="VARCHAR" property="modelDesc"/>
-        <!--<result column="status" jdbcType="VARCHAR" property="status"/>-->
+        <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="test_id" jdbcType="BIGINT" property="testId"/>
         <result column="dev_id" jdbcType="BIGINT" property="devId"/>
     </resultMap>
-
-	<sql id="modelColumns">
-		sm.id,
-		sm.model_name AS modelName,
-		sm.project_id AS projectId,
-		sm.model_desc AS modelDesc,
-		sm.status,
-		sm.test_id AS testId,
-		sm.dev_id AS devId,
-		su.cn_name AS testName,
-		su2.cn_name AS devName,
-		sp.project_name AS projectName
-	</sql>
+    
+     <sql id="modelColumns">
+    	sm.id,
+    	sm.model_name AS modelName,
+    	sm.project_id AS projectId,
+    	sm.model_desc AS modelDesc,
+    	sm.status,
+    	sm.test_id AS testId,
+    	sm.dev_id AS devId,
+    	su.cn_name AS testName,
+    	su2.cn_name AS devName,
+    	sp.project_name AS projectName
+    </sql>
 
 	<select id="searchModelList"  parameterType="Model" resultType="HashMap">
 	SELECT <include refid="modelColumns" />
 	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
-	LEFT JOIN sys_user su2 ON sm.dev_id=su2.id
-	LEFT JOIN sys_project sp ON	sm.project_id =sp.id
+	LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON
+	sm.project_id =sp.id
 	WHERE 1=1
 	<if test="modelName!=null and modelName!=''">AND sm.model_name=#{modelName} </if>
 	<if test="projectId!=null and projectId!=''">AND sm.project_id=#{projectId} </if>
-	<!--<if test="status!=null and status!=''">AND sm.status=#{status} </if>-->
+	<if test="status!=null and status!=''">AND sm.status=#{status} </if>
 	<if test="testId!=null and testId!=''">AND sm.test_id=#{testId} </if>
 	<if test="devId!=null and devId!=''">AND sm.dev_id=#{devId} </if>
     order by sm.id ASC
 	</select>
-
+	
 	<select id="getModelList"  resultType="HashMap">
 	SELECT <include refid="modelColumns" /> 
 	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
     LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
     order by sm.id ASC
 	</select>
+
+	<select id="getModelByProjectId"  parameterType="java.lang.Long" resultType="HashMap">
+	SELECT <include refid="modelColumns" /> 
+	FROM sys_model sm LEFT JOIN sys_user su ON sm.test_id=su.id
+    LEFT JOIN sys_user su2 ON sm.dev_id=su2.id LEFT JOIN sys_project sp ON sm.project_id =sp.id
+    WHERE sm.project_id=#{projectId}
+    order by sm.id ASC
+	</select>
 	
 	<insert id="addNewModel">
 	insert into
-	sys_model(model_name,project_id,model_desc,test_id,dev_id)
-	values(#{modelName}, #{projectId},#{modelDesc}, #{testId},#{devId})
+	sys_model(model_name,project_id,model_desc,status,test_id,dev_id)
+	values(#{modelName}, #{projectId},#{modelDesc}, #{status}, #{testId},
+	#{devId})
     </insert>
     
     <select id="getModelById" parameterType="java.lang.Long" resultType="HashMap">
@@ -69,6 +78,7 @@
 	model_name=#{modelName},
 	project_id=#{projectId},
 	model_desc=#{modelDesc},
+	status=#{status},
 	test_id=#{testId},
 	dev_id=#{devId}
 	WHERE id=#{id}

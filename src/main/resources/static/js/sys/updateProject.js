@@ -43,12 +43,10 @@ layui.use([ 'form', 'jquery' ], function() {
 		var id=$("#id").val();
 		var projectname = $("#projectname").val();
 		var projectdesc = $("#projectdesc").val();
-        var testenv = $("#testenv").val();
-        var devenv = $("#devenv").val();
-		// var testId = $("#testId").val();
-		// var devId = $("#devId").val();
+		var testId = $("#testId").val();
+		var devId = $("#devId").val();
 		//var status = $("#status").val();
-		// var status = $("input[name='status']:checked").val();
+		//var status = $("input[name='status']:checked").val();
 		
 			$.ajax({
 				url : '../../interface/updateProject',
@@ -59,10 +57,9 @@ layui.use([ 'form', 'jquery' ], function() {
 					id:id,
 					projectName:projectname,
 					projectDesc:projectdesc,
-					testEnv:testenv,
-					devEnv:devenv
-					// testId:testId,
-					// devId:devId
+					testId:testId,
+					devId:devId,
+				//	status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {

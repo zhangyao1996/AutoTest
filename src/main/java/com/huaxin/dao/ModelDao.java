@@ -21,7 +21,7 @@ public interface ModelDao {
 
 	public int addNewModel(Model model);
 
-	public HashMap getModelById(Long id);
+	public HashMap<String, Object> getModelById(Long id);
 
 	public int updateModel(Model model);
 
@@ -30,6 +30,8 @@ public interface ModelDao {
 	public Model getModelByModelName(String modelName);
 	
 	public void deleteModelByProId(Long id);
+	
+	public List getModelByProjectId(Long projectId);
 
 }
 

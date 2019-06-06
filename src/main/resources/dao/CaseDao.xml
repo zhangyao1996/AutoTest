@@ -49,7 +49,6 @@
 		WHERE sp.id =sc.project_id AND sm.id=sc.model_id 
 		<if test="caseName!=null and caseName!=''">AND sc.case_name like '%${caseName}%' </if>
 		<if test="projectId!=null and projectId!=''">AND sc.project_id=#{projectId} </if>
-		<if test="status!=null and status!=''">AND sc.status=#{status} </if>
 		<if test="modelId!=null and modelId!=''">AND sc.model_id=#{modelId} </if>
 		<if test="api!=null and api!=''">AND sc.api=#{api} </if>
 		<if test="version!=null and version!='' ">AND sc.version=#{version} </if>

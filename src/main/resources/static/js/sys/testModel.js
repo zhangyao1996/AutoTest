@@ -12,11 +12,12 @@ layui.use('table', function(){
     ,cols: [[ //表头
     	 {type:'checkbox'}
       ,{field: 'id', title: 'ID', width:'5%'}
-      ,{field: 'modelName', title: '模块名', width:'15%'}
+      ,{field: 'modelName', title: '模块名', width:'20%'} 
+      ,{field: 'projectName', title: '项目名', width:'20%'}
+      ,{field: 'testName', title: '测试人员', width: '20%'}
+      ,{field: 'devName', title: '开发人员', width: '20%'}
       ,{field: 'modelDesc', title: '模块描述', width: '20%'}
-      ,{field: 'projectName', title: '项目名', width:'15%'}
-      ,{field: 'testName', title: '测试人员', width: '10%'}
-      ,{field: 'devName', title: '开发人员', width: '10%'}
+   //  ,{field: 'status', title: '状态', width: '10%'}
     ]]
   });
   
@@ -27,6 +28,7 @@ layui.use('table', function(){
 				var modelName=$("#modelName").val();
 				var testId=$("#testId").val();
 				var devId=$("#devId").val();
+				//var status=$("#status").val();
 				var index=layer.msg('查询中，请稍后。。。',{icon:16,time:false,shade:0});
 				setTimeout(function() {
 				 table.reload('tableDate', {//执行table重载
@@ -39,7 +41,7 @@ layui.use('table', function(){
 					where : {
 						modelName:modelName,
 						projectId:projectId,
-						status:status,
+						//status:status,
 						testId:testId,
 						devId:devId
 					}

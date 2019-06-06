@@ -1,13 +1,22 @@
 layui.use([ 'form', 'jquery' ], function() {
 	var form = layui.form;
 	var $ = layui.jquery;
+	
+//	var staval = $("#state").val(); //hidden 隐藏框的数据
+//	$("#devId option[value = '"+staval+"']").attr("selected",true);
+//	var devId=$("#devId").val();
+//	alert(devId);
 
-    $("#devId").find("option[value='"+$("#devPerson").val()+"']").attr("selected",true);
-    $("#testId").find("option[value='"+$("#testPerson").val()+"']").attr("selected",true);
-    $("#projectId").find("option[value='"+$("#projectName").val()+"']").attr("selected",true);
-    form.render('select');
-
-    // 验证规则
+//	$("#devId").find("option[value='"+$("#devPerson").val()+"']").attr("selected",true);
+//	$("#testId").find("option[value='"+$("#testPerson").val()+"']").attr("selected",true);
+//	$("#projectId").find("option[value='"+$("#projectName").val()+"']").attr("selected",true);
+//	form.render('select');
+//	var devName="${model.devName}";
+//	alert(devName);
+//	 $("#devId").atr("你好");
+	 
+	
+	// 验证规则
 //	form.verify({
 //		username : [ /^[a-zA-Z0-9]{4,12}$/, '用户名必须是4-16位的字母与数字' ],
 //		password : [ /^[a-zA-Z0-9]{4,16}$/, '密码必须是4-16位的字母与数字' ],
@@ -44,7 +53,8 @@ layui.use([ 'form', 'jquery' ], function() {
 		var testId = $("#testId").val();
 		var devId = $("#devId").val();
 		var modeldesc = $("#modeldesc").val();
-		// var status = $("input[name='status']:checked").val();
+		//var status = $("#status").val();
+		var status = $("input[name='status']:checked").val();
 		
 		console.log(modelname+projectId);
 			$.ajax({
@@ -55,10 +65,11 @@ layui.use([ 'form', 'jquery' ], function() {
 				data : JSON.stringify({
 					id:id,
 					modelName : modelname,
-                    modelDesc : modeldesc,
 					projectId : projectId,
 					testId : testId,
-					devId : devId
+					devId : devId,
+					modelDesc : modeldesc,
+			//		status : status
 				}),
 				success : function(data) {
 					if (data.result == true) {

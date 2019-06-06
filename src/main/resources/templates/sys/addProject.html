@@ -16,62 +16,43 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
+			<label class="layui-form-label">测试人员：</label>
+			<div class="layui-input-inline">
+				<select name="testId" id="testId" lay-verify="required" lay-filter="testId">
+					<option value="">请选择</option>
+					<option th:selected="${testId  eq test.id}"
+						th:each="test : ${testList}" th:value="${test.id}"
+						th:text="${test.cnName}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">开发人员：</label>
+			<div class="layui-input-inline">
+				<select name="devId" id="devId" lay-verify="required" lay-filter="devId">
+					<option value="">请选择</option>
+					<option th:selected="${devId  eq dev.id}"
+						th:each="dev : ${devList}" th:value="${dev.id}"
+						th:text="${dev.cnName}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
 			<label class="layui-form-label">项目描述：</label>
 			<div class="layui-input-inline">
-				<input type="text" name="projectdesc" id="projectdesc"
-					   placeholder="请输入项目描述" autocomplete="off" class="layui-input"
-					   style="width: 300px">
+				<input type="text" name="projectdesc" id="projectdesc" 
+					placeholder="请输入项目描述" autocomplete="off" class="layui-input"
+				 style="width: 300px">
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">测试环境地址：</label>
+	<!-- 	<div class="layui-form-item">
+			<label class="layui-form-label"></label>
 			<div class="layui-input-inline">
-				<input type="text" name="testaddr" id="testenv"
-					   placeholder="请输入IP或域名" autocomplete="off" class="layui-input"
-					   style="width: 300px">
+				<input type="checkbox" name="status" id="status" title="状态" lay-skin="primary"
+					checked>
 			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">开发环境地址：</label>
-			<div class="layui-input-inline">
-				<input type="text" name="devaddr" id="devenv"
-					   placeholder="请输入IP或域名" autocomplete="off" class="layui-input"
-					   style="width: 300px">
-			</div>
-		</div>
-
-		<!--<div class="layui-form-item">-->
-			<!--<label class="layui-form-label">测试人员：</label>-->
-			<!--<div class="layui-input-inline">-->
-				<!--<select name="testId" id="testId" lay-filter="testId">-->
-					<!--<option value="">请选择</option>-->
-					<!--<option th:selected="${testId  eq test.id}"-->
-						<!--th:each="test : ${testList}" th:value="${test.id}"-->
-						<!--th:text="${test.cnName}"></option>-->
-				<!--</select>-->
-			<!--</div>-->
-		<!--</div>-->
-		<!--<div class="layui-form-item">-->
-			<!--<label class="layui-form-label">开发人员：</label>-->
-			<!--<div class="layui-input-inline">-->
-				<!--<select name="devId" id="devId" lay-filter="devId">-->
-					<!--<option value="">请选择</option>-->
-					<!--<option th:selected="${devId  eq dev.id}"-->
-						<!--th:each="dev : ${devList}" th:value="${dev.id}"-->
-						<!--th:text="${dev.cnName}"></option>-->
-				<!--</select>-->
-			<!--</div>-->
-		<!--</div>-->
-
-
-		<!--<div class="layui-form-item">-->
-			<!--<label class="layui-form-label"></label>-->
-			<!--<div class="layui-input-inline">-->
-				<!--<input type="checkbox" name="status" id="status" title="状态" lay-skin="primary"-->
-					<!--checked>-->
-			<!--</div>-->
-		<!--</div>-->
-		<!--<br>-->
+		</div> -->
+		<br>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button lay-submit lay-filter="add" type="button" class="layui-btn">立即提交</button>

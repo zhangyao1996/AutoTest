@@ -1,7 +1,6 @@
 
 server:
   port: 8080
-
 spring:
   datasource:
     name: springboot
@@ -52,6 +51,9 @@ spring:
     #启用@Aspectj注解驱动的切面，允许Spring创建基于类的代理
     auto: true
     proxy-target-class: true
+  mvc:
+    favicon:
+      enabled: false
 
 
 #mybatis配置

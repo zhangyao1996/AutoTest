@@ -75,14 +75,12 @@ public class InterfaceController {
 			@RequestParam(value = "limit", required = false) int limit,
 			@RequestParam(value = "modelName", required = false) String modelName,
 			@RequestParam(value = "projectId", required = false) Long projectId,
-			//@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "testId", required = false) Long testId,
 			@RequestParam(value = "devId", required = false) Long devId) {
 
 		com.huaxin.entity.Model model = new com.huaxin.entity.Model();
 		model.setModelName(modelName);
 		model.setProjectId(projectId);
-		//model.setStatus(status);
 		model.setTestId(testId);
 		model.setDevId(devId);
 		// 分页设置
@@ -126,8 +124,7 @@ public class InterfaceController {
 			@RequestParam(value = "projectId", required = false) Long projectId,
 			@RequestParam(value = "modelId", required = false) Long modelId,
 			@RequestParam(value = "api", required = false) String api,
-			@RequestParam(value = "version", required = false) String version,
-			@RequestParam(value = "status", required = false) String status) {
+			@RequestParam(value = "version", required = false) String version) {
 
 		Case case1 = new Case();
 		case1.setCaseName(caseName);
@@ -135,7 +132,6 @@ public class InterfaceController {
 		case1.setModelId(modelId);
 		case1.setApi(api);
 		case1.setVersion(version);
-		case1.setStatus(status);
 		case1.setModel(new com.huaxin.entity.Model());
 		case1.setProject(new Project());
 
@@ -167,6 +163,16 @@ public class InterfaceController {
 		return "/sys/addCase";
 	}
 
+	// 获取增加用例页面
+	@RequestMapping("/toGetModelListByProId")
+	@ResponseBody
+	public List toGetModelListByProjectId(@RequestParam(value = "projectId", required = false) Long projectId) {
+		HashMap map=new HashMap<>();
+		List modelList=modelService.doGetModelByProjectId(projectId);
+		map.put("modelList", modelList);
+		return modelList;
+	}
+
 	// 增加用例
 	@PostMapping("/addCase")
 	@ResponseBody
@@ -190,7 +196,7 @@ public class InterfaceController {
 			return map;
 		}
 
-		if (model.get("project_id").equals(proId) == false) {
+		if (model.get("projectId").equals(proId) == false) {
 			map.put("result", false);
 			map.put("msg", "该项目下无此模块,创建用例失败！");
 			return map;
@@ -271,7 +277,7 @@ public class InterfaceController {
 			return map;
 		}
 
-		if (model.get("project_id").equals(proId) == false) {
+		if (model.get("projectId").equals(proId) == false) {
 			map.put("result", false);
 			map.put("msg", "该项目下无此模块,创建用例失败！");
 			return map;
@@ -345,16 +351,17 @@ public class InterfaceController {
 	// 获取编辑模块页面
 	@RequestMapping("/toUpdateModel")
 	public String toUpdateModelPage(@RequestParam(value = "id", required = false) Long id, Model model) {
-		//com.huaxin.entity.Model model1=new com.huaxin.entity.Model();
-		// 获取model
-		HashMap model2 = modelService.doGetModelById(id);
 
-		String testName=(String) model2.get("testName");
-		String devName=(String) model2.get("devName");
-		String projectName= (String)model2.get("projectName");
-		model.addAttribute("testName", testName);
-		model.addAttribute("devName", devName);
-		model.addAttribute("projectName", projectName);
+		// 获取model
+		HashMap<String, Object> model2 = modelService.doGetModelById(id);
+		com.huaxin.entity.Model model3 = new com.huaxin.entity.Model();
+		model3.setDevId((Long) model2.get("devId"));
+		model3.setProjectId((Long) model2.get("projectId"));
+		model3.setTestId((Long) model2.get("testId"));
+		model3.setId((Long) model2.get("id"));
+		model3.setModelName((String) model2.get("modelName"));
+		model3.setModelDesc((String) model2.get("modelDesc"));
+
 		// 获取项目list
 		List projectList = projectService.doGetProjectList();
 
@@ -365,7 +372,7 @@ public class InterfaceController {
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("devList", devList);
 		model.addAttribute("testList", testList);
-		model.addAttribute("model", model2);
+		model.addAttribute("model", model3);
 		return "/sys/updateModel";
 	}
 
@@ -373,11 +380,11 @@ public class InterfaceController {
 	@PostMapping("/updateModel")
 	@ResponseBody
 	public HashMap toUpdateModel(@RequestBody(required = false) com.huaxin.entity.Model model) {
-//		if (model.getStatus() != null) {
-//			model.setStatus("True");
-//		} else {
-//			model.setStatus("False");
-//		}
+		if (model.getStatus() != null) {
+			model.setStatus("True");
+		} else {
+			model.setStatus("False");
+		}
 		HashMap map = new HashMap<>();
 		HashMap oldModel = modelService.doGetModelById(model.getId());
 		com.huaxin.entity.Model newModel = modelService.doGetModelByModelName(model.getModelName());
@@ -451,7 +458,6 @@ public class InterfaceController {
 		project.setDevId(devId);
 		project.setProjectName(projectName);
 		project.setTestId(testId);
-//		project.setStatus(status);
 		List projectList = projectService.doSearchProjectList(project);
 		// 获取分页数据
 		PageInfo<HashMap> pageInfo = new PageInfo<HashMap>(projectList);
@@ -484,11 +490,11 @@ public class InterfaceController {
 	public HashMap toAddProject(@RequestBody(required = false) Project project) {
 
 		HashMap map = new HashMap<>();
-//		if (project.getStatus() != null) {
-//			project.setStatus("True");
-//		} else {
-//			project.setStatus("False");
-//		}
+		if (project.getStatus() != null) {
+			project.setStatus("True");
+		} else {
+			project.setStatus("False");
+		}
 
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());
 		if (project2 != null) {
@@ -527,11 +533,11 @@ public class InterfaceController {
 	public HashMap toUpdateProject(@RequestBody(required = false) Project project) {
 
 		HashMap map = new HashMap<>();
-//		if (project.getStatus() != null) {
-//			project.setStatus("True");
-//		} else {
-//			project.setStatus("False");
-//		}
+		if (project.getStatus() != null) {
+			project.setStatus("True");
+		} else {
+			project.setStatus("False");
+		}
 
 		Project oldProject = projectService.doGetProjectById(project.getId());
 		Project project2 = projectService.doGetProjectByName(project.getProjectName());
