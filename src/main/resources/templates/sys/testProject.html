@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>项目信息</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<link rel="stylesheet" href="../../lib/layui/css/layui.css" media="all" />
-<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css"
-	media="all" />
+	<title>项目信息</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+			name="viewport">
+	<link rel="stylesheet" href="../../lib/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css"
+		  media="all" />
 
 </head>
 <body>
-	<div class="layui-form-item">
-		<div class="layui-input-inline">
-			<input class="layui-input" id="projectname" autocomplete="off"
-				placeholder="项目名">
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="devId" id="devId">
-				<option value="">开发人员</option>
-				<option th:selected="${devId  eq dev.id}" th:each="dev : ${devList}"
-					th:value="${dev.id}" th:text="${dev.cnName}"></option>
-			</select>
-		</div>
-		<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="testId" id="testId">
-				<option value="">测试人员</option>
-				<option th:selected="${testId  eq test.id}"
-					th:each="test : ${testList}" th:value="${test.id}"
-					th:text="${test.cnName}"></option>
-			</select>
-		</div>
-	<!-- 	<div class="layui-input-inline" style="width: 100px;">
-			<select class="layui-input" name="status" id="status" >
-				<option value="">状态</option>
-				<option value="False">False</option>
-				<option value="True">True</option>
-			</select>
-		</div> -->
-		<button class="layui-btn" data-type="reload" id="search">搜索</button>
+<div class="layui-form-item">
+	<div class="layui-input-inline">
+		<input class="layui-input" id="projectname" autocomplete="off"
+			   placeholder="项目名">
 	</div>
-	<!-- 动态表格 -->
-	<table id="testProject" lay-filter="test"></table>
-	<!-- 头部按钮 -->
-	<script type="text/html" id="toolbarDemo">
- 	 <div class="layui-btn-container">
-     <button class="layui-btn layui-btn-sm" lay-event="add"  data-toggle="modal" data-target="#myModal"> <i class="layui-icon">&#xe608;</i>添加</button>
-     <button class="layui-btn layui-btn-sm" lay-event="delete"> <i class="layui-icon">&#xe640;</i>删除</button>
-      <button class="layui-btn layui-btn-sm" lay-event="update"><i class="layui-icon">&#xe642;</i>编辑</button>
-    </div>
-	</script>
+	<!--<div class="layui-input-inline" style="width: 100px;">-->
+	<!--<select class="layui-input" name="devId" id="devId">-->
+	<!--<option value="">开发人员</option>-->
+	<!--<option th:selected="${devId  eq dev.id}" th:each="dev : ${devList}"-->
+	<!--th:value="${dev.id}" th:text="${dev.cnName}"></option>-->
+	<!--</select>-->
+	<!--</div>-->
+	<!--<div class="layui-input-inline" style="width: 100px;">-->
+	<!--<select class="layui-input" name="testId" id="testId">-->
+	<!--<option value="">测试人员</option>-->
+	<!--<option th:selected="${testId  eq test.id}"-->
+	<!--th:each="test : ${testList}" th:value="${test.id}"-->
+	<!--th:text="${test.cnName}"></option>-->
+	<!--</select>-->
+	<!--</div>-->
+	<!--<div class="layui-input-inline" style="width: 100px;">-->
+	<!--<select class="layui-input" name="status" id="status" >-->
+	<!--<option value="">状态</option>-->
+	<!--<option value="False">False</option>-->
+	<!--<option value="True">True</option>-->
+	<!--</select>-->
+	<!--</div>-->
+	<button class="layui-btn" data-type="reload" id="search">搜索</button>
+</div>
+<!-- 动态表格 -->
+<table id="testProject" lay-filter="test"></table>
+<!-- 头部按钮 -->
+<script type="text/html" id="toolbarDemo">
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="add"  data-toggle="modal" data-target="#myModal"> <i class="layui-icon">&#xe608;</i>添加</button>
+		<button class="layui-btn layui-btn-sm" lay-event="delete"> <i class="layui-icon">&#xe640;</i>删除</button>
+		<button class="layui-btn layui-btn-sm" lay-event="update"><i class="layui-icon">&#xe642;</i>编辑</button>
+	</div>
+</script>
 
 
 
