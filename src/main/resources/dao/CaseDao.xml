@@ -34,7 +34,7 @@
 		sc.api,
 		sc.version,
 		sc.case_desc,
-		sc.status,
+		<!--sc.status,-->
 		sp.id,
 		sp.project_name,
 		sm.id,

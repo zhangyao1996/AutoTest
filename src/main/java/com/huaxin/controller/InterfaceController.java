@@ -581,10 +581,10 @@ public class InterfaceController {
 		return map;
 	}
 
-	// 获取测试步骤页面
-	@RequestMapping("/testStep")
+	// 获取接口管理页面
+	@RequestMapping("/interfaceManage")
 	public String toTestStep() {
-		return "/sys/testStep";
+		return "/sys/interfaceManage";
 	}
 
 	// 获取测试步骤table

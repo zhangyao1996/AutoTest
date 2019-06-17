@@ -99,6 +99,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				  <configruation>
+					<!--配置devtool-->
+					<fork>true</fork>
+				  </configruation>
 			</plugin>
 		</plugins>
 	</build>
