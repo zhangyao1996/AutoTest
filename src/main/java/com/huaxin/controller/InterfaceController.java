@@ -13,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huaxin.entity.Case;
+import com.huaxin.entity.Interface;
 import com.huaxin.entity.Project;
 import com.huaxin.entity.Step;
 import com.huaxin.service.CaseService;
+import com.huaxin.service.InterfaceService;
 import com.huaxin.service.ModelService;
 import com.huaxin.service.ProjectService;
 import com.huaxin.service.StepService;
@@ -33,6 +40,8 @@ import com.huaxin.service.UserService;
 @RequestMapping("/interface")
 public class InterfaceController {
 
+	String prefix = "sys/interface";
+
 	@Autowired
 	private CaseService caseSercvice;
 	@Autowired
@@ -43,6 +52,8 @@ public class InterfaceController {
 	private UserService userService;
 	@Autowired
 	private StepService stepService;
+	@Autowired
+	private InterfaceService interfaceService;
 
 	// 获取测试模块页面
 	@RequestMapping("/testModel")
@@ -166,8 +177,8 @@ public class InterfaceController {
 	@RequestMapping("/toGetModelListByProId")
 	@ResponseBody
 	public List toGetModelListByProjectId(@RequestParam(value = "projectId", required = false) Long projectId) {
-		HashMap map=new HashMap<>();
-		List modelList=modelService.doGetModelByProjectId(projectId);
+		HashMap map = new HashMap<>();
+		List modelList = modelService.doGetModelByProjectId(projectId);
 		map.put("modelList", modelList);
 		return modelList;
 	}
@@ -487,7 +498,7 @@ public class InterfaceController {
 	@RequestMapping("/addProject")
 	@ResponseBody
 	public HashMap toAddProject(@RequestBody(required = false) Project project) {
-//
+
 		HashMap map = new HashMap<>();
 //		if (project.getStatus() != null) {
 //			project.setStatus("True");
@@ -581,11 +592,11 @@ public class InterfaceController {
 		return map;
 	}
 
-	// 获取接口管理页面
-	@RequestMapping("/interfaceManage")
-	public String toTestStep() {
-		return "/sys/interfaceManage";
-	}
+//	// 获取接口管理页面
+//	@RequestMapping("/interfaceManage")
+//	public String toTestStep() {
+//		return "/sys/interfaceManage";
+//	}
 
 	// 获取测试步骤table
 	@RequestMapping("/testStepList")
@@ -612,11 +623,76 @@ public class InterfaceController {
 		return map;
 	}
 
+//	// 删除步骤
+//	@DeleteMapping("/deleteStep")
+//	@ResponseBody
+//	@Transactional
+//	public HashMap deleteStep(@RequestParam(value = "ids", required = false) String ids) {
+//
+//		String[] id = ids.split(",");
+//		HashMap map = new HashMap<>();
+//		try {
+//			for (int i = 0; i < id.length; i++) {
+//				System.out.println(id[i]);
+//				Long num = Long.valueOf(id[i]);
+//				stepService.doDeleteStepById(num);
+//			}
+//			map.put("result", true);
+//			map.put("msg", "删除步骤成功！");
+//		} catch (Exception e) {
+//			map.put("result", false);
+//			map.put("msg", "删除步骤失败！");
+//		}
+//		return map;
+//	}
+//
+//	// 获取增加步骤页面
+//	@RequestMapping("/toAddStep")
+//	public String toAddStepPage(Model model) {
+//
+//		// 获取caselist
+//		List caseList = caseSercvice.doGetCaseList();
+//		model.addAttribute("caseList", caseList);
+//		return "/sys/addStep";
+//	}
+//
+//	// 获取增加步骤页面
+//	@RequestMapping("/toUpdateStep")
+//	public String toUpdateStepPage(Model model) {
+//
+//		// 获取caselist
+//		List caseList = caseSercvice.doGetCaseList();
+//		model.addAttribute("caseList", caseList);
+//		return "/sys/updateStep";
+//	}
+
+	// 获取接口管理页面
+	@RequestMapping("/interfaceManage")
+	public String toInterfaceManagePage() {
+		return prefix + "/interfaceManage";
+	}
+
+	// 接口管理列表
+	@RequestMapping("/testInterfaceList")
+	@ResponseBody
+	public HashMap<String, Object> interfaceList(@RequestParam(value = "page", required = false) int page,
+			@RequestParam(value = "limit", required = false) int limit) {
+		HashMap<String, Object> map = new HashMap<>();
+		Page<Interface> interPage = new Page<>(page, limit);
+		IPage<Interface> interPages = interfaceService.page(interPage);
+
+		map.put("code", 0);
+		map.put("msg", "success");
+		map.put("count", interPages.getTotal());
+		map.put("data", interPages.getRecords());
+		return map;
+	}
+
 	// 删除步骤
-	@DeleteMapping("/deleteStep")
+	@DeleteMapping("/deleteInterface")
 	@ResponseBody
 	@Transactional
-	public HashMap deleteStep(@RequestParam(value = "ids", required = false) String ids) {
+	public HashMap deleteInterface(@RequestParam(value = "ids", required = false) String ids) {
 
 		String[] id = ids.split(",");
 		HashMap map = new HashMap<>();
@@ -624,34 +700,59 @@ public class InterfaceController {
 			for (int i = 0; i < id.length; i++) {
 				System.out.println(id[i]);
 				Long num = Long.valueOf(id[i]);
-				stepService.doDeleteStepById(num);
+				interfaceService.removeById(num);
 			}
 			map.put("result", true);
-			map.put("msg", "删除步骤成功！");
+			map.put("msg", "删除接口成功！");
 		} catch (Exception e) {
 			map.put("result", false);
-			map.put("msg", "删除步骤失败！");
+			map.put("msg", "删除接口失败！");
 		}
 		return map;
 	}
 
 	// 获取增加步骤页面
-	@RequestMapping("/toAddStep")
-	public String toAddStepPage(Model model) {
+	@RequestMapping("/toAddInterface")
+	public String toAddInterfacePage(Model model) {
 
 		// 获取caselist
 		List caseList = caseSercvice.doGetCaseList();
 		model.addAttribute("caseList", caseList);
-		return "/sys/addStep";
+		return prefix + "/addInterface";
+	}
+
+	// 增加接口
+	@PostMapping("/addInterface")
+	@ResponseBody
+	public HashMap toAddInterface(@RequestBody(required = false) Interface iface) {
+		HashMap<String, Object> map = new HashMap<>();
+		QueryWrapper queryWrapper = new QueryWrapper<Interface>();
+		queryWrapper.eq("case_name", iface.getCaseName());
+		int count = interfaceService.count(queryWrapper);
+		if (count > 0) {
+			map.put("result", true);
+			map.put("msg", "用例名已存在！");
+			return map;
+		}
+		boolean result = interfaceService.save(iface);
+		if (result) {
+			map.put("result", true);
+			map.put("msg", "创建接口成功！");
+		} else {
+			map.put("result", false);
+			map.put("msg", "创建接口失败！");
+		}
+		return map;	
 	}
 
 	// 获取增加步骤页面
-	@RequestMapping("/toUpdateStep")
-	public String toUpdateStepPage(Model model) {
+	@RequestMapping("/toUpdateInterface")
+	public String toUpdateInterfacePage(Model model) {
 
 		// 获取caselist
 		List caseList = caseSercvice.doGetCaseList();
 		model.addAttribute("caseList", caseList);
-		return "/sys/updateStep";
+		return prefix + "/updateInterface";
 	}
+
 }
