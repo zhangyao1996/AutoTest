@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>更新步骤</title>
+<link rel="stylesheet" th:href="@{../../lib/layui/css/layui.css}" />
+<!-- <style type="text/css">
+.right-content{
+    width: 260px;
+    background: #fff;
+    float: left;
+    margin-left: 10px;
+    overflow: hidden;
+}
+</style> -->
+</head>
+<div class=" layui-main ">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label">步骤名 ：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="stepname" id="stepname"  lay-verify="required"
+					placeholder="请输入步骤名" autocomplete="off" class="layui-input"
+				   style="width: 300px">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用例名：</label>
+			<div class="layui-input-inline">
+				<select name="caseId" id="caseId" lay-verify="required" lay-filter="caseId" >
+					<option value=""  style="width: 300px">请选择</option>
+					<option th:selected="${caseId  eq case.id}"
+						th:each="case : ${caseList}" th:value="${case.id}"
+						th:text="${case.caseName}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+		  <label class="layui-form-label">方式：</label>
+		   <div class="layui-input-inline">
+				<input type="radio" name="reqmode" value="GET" title="GET" checked> <input
+					type="radio" name="reqmode" value="POST" title="POST">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">信息头：</label>
+			<ul id="header">
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="名称">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="值">
+					</div>
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">Parameters：</label>
+			<ul id="param">
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="参数名">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="参数值">
+					</div>
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">Assert：</label>
+		<!-- 	<div class="layui-input-block">
+				<input type="checkbox" name="assret" id="assert" lay-skin="switch" lay-filter="switchAst">
+			</div> -->
+			<ul>
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="断言名">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="值">
+					</div> 
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">步骤描述：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="stepdesc" id="stepdesc" 
+					placeholder="请输入步骤描述" autocomplete="off" class="layui-input"
+				 style="width: 300px">
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label"></label>
+			<div class="layui-input-inline">
+				<input type="checkbox" name="status" id="status" title="状态" lay-skin="primary"
+					checked>
+			</div>
+		</div> -->
+		<br>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button lay-submit lay-filter="add" type="button" class="layui-btn">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="../../lib/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/sys/updateStep.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>新增步骤</title>
+<link rel="stylesheet" th:href="@{../../lib/layui/css/layui.css}" />
+<!-- <style type="text/css">
+.right-content{
+    width: 260px;
+    background: #fff;
+    float: left;
+    margin-left: 10px;
+    overflow: hidden;
+}
+</style> -->
+</head>
+<div class=" layui-main ">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label">用例名 ：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="casename" id="casename"  lay-verify="required"
+					placeholder="请输入用例名" autocomplete="off" class="layui-input"
+				   style="width: 300px">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">接口名 ：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="interfacename" id="interfacename"
+					lay-verify="required" placeholder="请输入接口名" autocomplete="off"
+					class="layui-input" style="width: 300px">
+			</div>
+		</div>
+		<div class="layui-form-item">
+		  <label class="layui-form-label">方式：</label>
+		   <div class="layui-input-inline" id="reqmode">
+				<input type="radio" name="reqmode" value="GET" title="GET" checked> <input
+					type="radio" name="reqmode" value="POST" title="POST">
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">信息头</label>
+			<div class="layui-input-block">
+				<textarea id="header" placeholder="请输入内容" class="layui-textarea" style="width: 300px"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">Param</label>
+			<div class="layui-input-block">
+				<textarea id="param" placeholder="请输入内容" class="layui-textarea" style="width: 300px"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">Body</label>
+			<div class="layui-input-block">
+				<textarea id="body" placeholder="请输入内容" class="layui-textarea" style="width: 300px"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">断言</label>
+			<div class="layui-input-block">
+				<textarea id="ast" placeholder="请输入内容" class="layui-textarea" style="width: 300px"></textarea>
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label">信息头：</label>
+			<ul id="header">
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="名称" id="headerkey">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="值" id="headervalue">
+					</div>
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">Parameters：</label>
+			<ul id="param">
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="参数名" id="paramkey">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="参数值" id="paramvalue">
+					</div>
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">Assert：</label>
+			<div class="layui-input-block">
+				<input type="checkbox" name="assret" id="assert" lay-skin="switch" lay-filter="switchAst">
+			</div>
+			<ul id="ast">
+				<li>
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="断言名" id="astkey">
+					</div> 
+					<div class="layui-input-inline">
+						<input class="layui-input"  placeholder="值" id="astvalue">
+					</div> 
+					<div class="layui-btn-group layui-input-inline">
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe654;</i>
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-sm">
+							<i class="layui-icon">&#xe640;</i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</div> -->
+		<br>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button lay-submit lay-filter="add" type="button" class="layui-btn">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="../../lib/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/sys/interface/addInterface.js"></script>
+</body>
+</html>
